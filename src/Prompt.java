@@ -13,6 +13,9 @@ public class Prompt {
 			System.out.println("월을 입력하세요.");
 			System.out.print("Month> ");
 			int month = scan.nextInt();
+			System.out.println("첫번째 요일을 입력하세요. (SU, MO, WE, TH, FR, SA)");
+			System.out.print("Day> ");
+			String firstDay = scan.next();
 
 			if (month == -1) {
 				System.out.println("Have a nice day!");
@@ -20,7 +23,7 @@ public class Prompt {
 			} else if (month > 12 || month < 1) {
 				System.out.println("알맞은 값을 입력해주세요.");
 			} else {
-				calandar.printCalandar(year, month);
+				calandar.printCalandar(year, month, firstDay);
 			}
 		}
 
