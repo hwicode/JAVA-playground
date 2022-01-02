@@ -20,23 +20,22 @@ public class HelloGit {
 	public static void main(String[] args) {
 
 		// 숫자를 입력받아 해당하는 달의 최대 일수를 출력하는 프로그램
+		String PROMPT = "cal> ";
 		Scanner scan = new Scanner(System.in);
 		HelloGit calandar = new HelloGit();
-		System.out.println("반복횟수를 입력하세요.");
-		int number = scan.nextInt();
-		System.out.println("월을 입력하세요.");
-		int[] inputMonths = new int[number];
-		for (int i = 0; i < number; i++) {
+
+		while (true) {
+			System.out.println("월을 입력하세요.");
+			System.out.print(PROMPT);
 			int month = scan.nextInt();
-			inputMonths[i] = month;
-		}
 
-		System.out.println();
-		for (int i = 0; i < number; i++) {
-			System.out.printf("%d월은 %d일까지 있습니다.\n", inputMonths[i], calandar.getMaxDaysOfMonth(inputMonths[i]));
+			if (month != -1) {
+				System.out.printf("%d월은 %d일까지 있습니다.\n", month, calandar.getMaxDaysOfMonth(month));
+			} else {
+				System.out.println("Have a nice day!");
+				break;
+			}
 		}
-
-//		calandar.printSampleCalandar();
 
 		scan.close();
 	}
