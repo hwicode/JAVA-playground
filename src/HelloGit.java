@@ -29,11 +29,13 @@ public class HelloGit {
 			System.out.print(PROMPT);
 			int month = scan.nextInt();
 
-			if (month != -1) {
-				System.out.printf("%d월은 %d일까지 있습니다.\n", month, calandar.getMaxDaysOfMonth(month));
-			} else {
+			if (month == -1) {
 				System.out.println("Have a nice day!");
 				break;
+			} else if (month > 12 || month < 1) {
+				System.out.println("알맞은 값을 입력해주세요.");
+			} else {
+				System.out.printf("%d월은 %d일까지 있습니다.\n", month, calandar.getMaxDaysOfMonth(month));
 			}
 		}
 
