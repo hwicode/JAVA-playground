@@ -4,7 +4,7 @@ public class Prompt {
 
 	public void runPrompt() {
 		Scanner scan = new Scanner(System.in);
-		HelloGit calandar = new HelloGit();
+		HelloGit calendar = new HelloGit();
 
 		while (true) {
 			System.out.println("년을 입력하세요.");
@@ -25,7 +25,7 @@ public class Prompt {
 			} else if (month > 12 || month < 1) {
 				System.out.println("알맞은 값을 입력해주세요.");
 			} else {
-				calandar.printCalandar(year, month);
+				calendar.printCalandar(year, month);
 			}
 		}
 
