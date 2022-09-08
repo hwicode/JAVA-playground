@@ -1,14 +1,30 @@
+import java.io.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Calendar {
 
 	private static final int[] MAX_DAYS = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	private static final int[] LEAP_MAX_DAYS = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	private static final String SAVE_FILE = "calendar.dat";
 	private final Map<LocalDate, List<String>> plans = new HashMap<>();
+
+	public Calendar() {
+		File file = new File(SAVE_FILE);
+		if (file.exists()){
+			try (Scanner scanner = new Scanner(file)) {
+				while (scanner.hasNext()) {
+					String line = scanner.nextLine();
+					String[] planInfo = line.split(",");
+					String date = planInfo[0];
+					String plan = planInfo[1];
+					addPlan(date, plan);
+				}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public boolean isLeapYear(int year) {
 		return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
@@ -43,6 +59,11 @@ public class Calendar {
 	}
 
 	public void registerPlan(String strDate, String plan) {
+		addPlan(strDate, plan);
+		savePlan(strDate, plan);
+	}
+
+	private void addPlan(String strDate, String plan) {
 		LocalDate date = LocalDate.parse(strDate);
 		if (plans.containsKey(date)) {
 			List<String> datePlans = plans.get(date);
@@ -51,6 +72,15 @@ public class Calendar {
 			List<String> datePlans = new ArrayList<>();
 			datePlans.add(plan);
 			plans.put(date, datePlans);
+		}
+	}
+
+	private void savePlan(String date, String plan) {
+		File file = new File(SAVE_FILE);
+		try (FileWriter fileWriter = new FileWriter(file, true)) {
+			fileWriter.write(date + "," + plan + "\n");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
